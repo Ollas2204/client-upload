@@ -51,7 +51,7 @@
       },
       methods: {
         login() {
-          axios.post('http://localhost:3000/login', {
+          axios.post('http://35.240.157.177/login', {
               email: this.email,
               password: this.password,
             })
@@ -62,7 +62,7 @@
                 this.msg = `selamat datang ${data.first_name}`
                 localStorage.setItem('token', data.token)
                 setTimeout(() => {
-                  window.location = "http://localhost:8080/upload.html"
+                  window.location = "http://35.240.157.177/upload.html"
                 }, 2000)
               } else {
                 this.msg = 'Signup dulu please....'

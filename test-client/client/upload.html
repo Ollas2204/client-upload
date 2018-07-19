@@ -42,7 +42,7 @@
         },
         beforeMount: function(){
           if(!this.token){
-            window.location = "http://localhost:8080/"
+            window.location = "http://35.240.157.177"
           }
         },
         methods :{
@@ -54,7 +54,7 @@
             var data = new FormData();
             console.log(this.file);
             data.append('image', this.file);
-            axios.post('http://127.0.0.1:3000/upload',data)
+            axios.post('http://35.240.157.177/upload',data)
               .then(({ data })=>this.link= data.link)
               .catch(console.log)
           }
