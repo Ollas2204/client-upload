@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Signup Form</title>
+</head>
+
+<body>
+  <div id="test">
+    <h4>{{ msg }}</h4>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input v-model="first_name" type="text" class="validate">
+            <label class="active" for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input v-model="last_name" type="text" class="validate">
+            <label class="active" for="last_name">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input v-model="password" type="password" class="validate">
+            <label class="active" for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input v-model="email" type="email" class="validate">
+            <label class="active" for="email">Email</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <button class="btn waves-effect waves-light" @click="signup()" name="action">Submit</button>
+  </div>
+  <script type="text/javascript">
+    new Vue({
+      el: "#test",
+      data: {
+        first_name: "",
+        last_name: "",
+        password: "",
+        email: "",
+        msg: ""
+      },
+      methods: {
+        signup() {
+          axios.post('http://localhost:3000/signup', {
+              first_name: this.first_name,
+              last_name: this.last_name,
+              password: this.password,
+              email: this.email,
+            })
+            .then(({
+              data
+            }) => {
+              if (data.status) {
+                this.msg = "Data Berhasil ditambah, silahkan login ...."
+                setTimeout(() => {
+                  window.location = "http://localhost:8080/"
+                }, 2000)
+              }
+            })
+            .catch(err => {
+              this.msg = err.message
+            })
+        }
+      }
+    })
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+
+</html>
